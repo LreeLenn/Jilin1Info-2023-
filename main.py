@@ -7,6 +7,8 @@ import json
 from qgis.core import QgsCoordinateTransform, QgsProject, QgsCoordinateReferenceSystem
 from qgis.gui import QgsMapCanvas
 
+from PyQt5.QtGui import QColor
+
 def get_wgs84_coordinates(event_pos, canvas: QgsMapCanvas):
     # 获取当前 CRS 和目标 CRS
     current_crs = canvas.mapSettings().destinationCrs()  # 当前画布的 CRS
@@ -114,6 +116,61 @@ class MapClickTool(QgsMapTool):
         # 将特征添加到图层中
         provider.addFeature(feature)
         layer.updateExtents()
+
+         # 设置点样式
+        symbol = QgsMarkerSymbol.createSimple({
+            'name': 'circle',
+            'color': '255,182,193,175',  # 淡紫色 (RGBA), 69% 透明度
+            'outline_color': 'white',    # 轮廓颜色白色
+            'outline_width': '0.35'       # 轮廓宽度
+        })
+        layer.renderer().setSymbol(symbol)
+
+        # # # 设置标签样式
+        layer_settings = QgsPalLayerSettings()
+        layer_settings.fieldName = 'date'  # 使用 "date" 字段作为标签
+        layer_settings.dist = 2.6
+        # # layer_settings.isExpression = False
+
+        # # 配置文本样式
+        text_format = QgsTextFormat()
+        buffer_settings = text_format.buffer()
+        buffer_settings.setEnabled(True)
+        buffer_settings.setSize(1.0)
+        buffer_settings.setColor(QColor('white'))
+        buffer_settings.setOpacity(1.0)
+        text_format.setBuffer(buffer_settings)
+
+        # # # # 创建并设置缓冲区样式
+        # buffer_settings = QgsTextBufferSettings()
+        # buffer_settings.enabled = Trueq
+        # buffer_settings.size = 1  # Set the buffer size
+        # # buffer_settings.enabled()
+        # # buffer_settings.setEnabled(True)  # 启用文本缓冲
+        # # # # buffer_settings.setSize(1.5)  # 设置缓冲区大小
+        # buffer_settings.color = QColor('black')  # 设置缓冲区颜色为白色
+        # buffer_settings.transparency = 0
+
+        # # # 将缓冲区设置应用到文本格式
+        layer_settings.buffer = buffer_settings
+
+        # 设置文本颜色
+        text_format.setColor(QColor('black'))
+
+        # # 应用文本样式
+        # layer_settings.textFormat = text_format
+        layer_settings.setFormat(text_format)
+
+
+        # # 启用标签
+        layer_settings.enabled = True
+        labeling = QgsVectorLayerSimpleLabeling(layer_settings)
+        layer.setLabeling(labeling)
+        layer.setLabelsEnabled(True)
+        layer.triggerRepaint()
+
+        
+
 
         # 将图层添加到QGIS项目中
         QgsProject.instance().addMapLayer(layer)

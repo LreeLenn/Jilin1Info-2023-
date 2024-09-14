@@ -2,6 +2,10 @@
 name=Jilin1Info(2023)
 qgisMinimumVersion=3.0
 description=2023年全国50cm吉林一号影像拍摄日期查询
+about=你知道吗？只要你提供切片层级和经纬度坐标，就可以知道镶嵌底图是用的哪一天拍摄的了。更多信息访问毛毛De地理空间：https://gis.lreept.space
 version=1.0
+homepage=https://github.com/LreeLenn
 author= lreept
-email=https://gis.lreept.space
+email=gis.linchuxian@gmail.com
+repository=https://github.com/LreeLenn/Jilin1Info-2023-
+tracker=https://github.com/LreeLenn/Jilin1Info-2023-/issues
