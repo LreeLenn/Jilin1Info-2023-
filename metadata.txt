@@ -1,0 +1,7 @@
+[general]
+name=Jilin1Info(2023)
+qgisMinimumVersion=3.0
+description=2023年全国50cm吉林一号影像拍摄日期查询
+version=1.0
+author= lreept
+email=https://gis.lreept.space
