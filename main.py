@@ -70,7 +70,7 @@ class MapClickTool(QgsMapTool):
 
     def get_tile_info(self, zoom, lon, lat):
         # 构建请求URL
-        url = f"https://ovital.jl1mall.com/getTileInfo/{zoom}/{lon}/{lat}?mk=73ad26c4aa6957eef051ecc5a15308b4&tk=268f8056e6b07f974bb2dd2d229665bd"
+        url = f"https://ovital.jl1mall.com/getTileInfo/{zoom}/{lon}/{lat}?mk=73ad26c4aa6957eef051ecc5a15308b4&tk=7ac621fe6ce92a9ebe2460319ae0b52e "
         response = requests.get(url)
         
         # 检查响应是否成功
