@@ -69,8 +69,10 @@ class MapClickTool(QgsMapTool):
             self.create_point_layer(zoom, lon, lat, tile_info)
 
     def get_tile_info(self, zoom, lon, lat):
-        # 构建请求URL
-        url = f"https://ovital.jl1mall.com/getTileInfo/{zoom}/{lon}/{lat}?mk=73ad26c4aa6957eef051ecc5a15308b4&tk=7ac621fe6ce92a9ebe2460319ae0b52e "
+        # 默认以@lreept的图源KEY构建请求URL
+        url = f"https://gis.lreept.space/imagerydate/{zoom}/{lon}/{lat}"
+        # 以个人申请的图源KEY构建请求URL
+        # url = f"https://api.jl1mall.com/getTileInfo/{zoom}/{lon}/{lat}?mk=73ad26c4aa6957eef051ecc5a15308b4&tk=<Your Token>"
         response = requests.get(url)
         
         # 检查响应是否成功
